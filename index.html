@@ -40,7 +40,7 @@ body {
     50% { opacity: 1; transform: scale(1.2); }
 }
 
-/* --- EXPANDABLE CONTAINER --- */
+/* --- CONTAINER --- */
 .container {
     position: relative; 
     background: rgba(255, 255, 255, 0.08);
@@ -50,7 +50,6 @@ body {
     border-radius: 25px;
     width: 100%; 
     max-width: 400px; 
-    /* Box expands naturally with content */
     max-height: 90vh; 
     text-align: center;
     box-shadow: 0 15px 35px rgba(0,0,0,0.5);
@@ -61,13 +60,12 @@ body {
     transition: all 0.5s ease;
 }
 
-/* Manual scrolling only */
 .scroll-content {
     max-height: 500px;
     overflow-y: auto;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none; 
 }
-.scroll-content::-webkit-scrollbar { display: none; } /* Safari/Chrome */
+.scroll-content::-webkit-scrollbar { display: none; }
 
 /* --- GIFT --- */
 .gift-box {
@@ -111,13 +109,13 @@ button {
     0% { transform: translate3d(0,0,0); opacity: 1; }
     100% { transform: translate3d(var(--tx), var(--ty), 0); opacity: 0; }
 }
-@keyframes floatUp { to { transform: translate3d(0, -110vh, 0) rotate(360deg); opacity: 0; } }
+@keyframes floatUp { 
+    to { transform: translate3d(0, -110vh, 0) rotate(360deg); opacity: 0; } 
+}
 @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
 @media screen and (max-width:320px){
-    html{
-        font-size: 78%;
-    }
+    html{ font-size: 78%; }
 }
 </style>
 </head>
@@ -126,8 +124,8 @@ button {
 
 <div class="moon"></div>
 
-<audio id="bgMusic" loop>
-  <source src="SK-Reveals-Himself.mp3" type="audio/mp3">
+<audio id="bgMusic" loop playsinline preload="auto">
+    <source src="SK-Reveals-Himself.mp3" type="audio/mp3">
 </audio>
 
 <div class="container">
@@ -146,8 +144,8 @@ button {
         <p id="l3">Will you stay with me forever and hold my hand through everything? I promise to always be by your side 🖤✨</p>
         <p id="l4">You are my sunshine, my happiness, my everything 💞✨</p>
         <p id="l5">I want a lifetime of memories, laughs, and love with you 🖤✨</p>
-        <p id="l6">Sorry for teasing you all these days. I made you cry many times and hurt you through my words and actions 🖤✨</p>
-        <p id="l7">I’m truly sorry for all the fights. From here onwards, this will not happen again. Just hold my hand, and I promise I will make this world beautiful for you 🖤✨</p>
+        <p id="l6">Sorry for teasing you all these days. I made you cry many times 🖤✨</p>
+        <p id="l7">I’m truly sorry for all the fights. From here onwards, this will not happen again. Just hold my hand 🖤✨</p>
         
         <h2 id="l8" class="hidden" style="color:#00d2ff; font-size: 1.1rem; margin-top: 20px;">Shall we start this New Year together? 💍</h2>
         
@@ -166,7 +164,6 @@ button {
 </div>
 
 <script>
-// 1. Stars Setup
 const body = document.body;
 for (let i = 0; i < 60; i++) {
     const star = document.createElement('div');
@@ -180,7 +177,22 @@ for (let i = 0; i < 60; i++) {
 }
 
 function openBox() {
-    document.getElementById('bgMusic').play().catch(() => {});
+    // MOBILE AUDIO FIX:
+    // Some mobile browsers need the audio context resumed or played directly inside the click event.
+    const audio = document.getElementById('bgMusic');
+    
+    // Attempt playback
+    const playPromise = audio.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            // Automatic playback started!
+        }).catch(error => {
+            // Auto-play was prevented.
+            console.log("Playback failed:", error);
+        });
+    }
+
     document.getElementById('gift-wrapper').style.display = 'none';
     const content = document.getElementById('content');
     content.classList.remove('hidden');
@@ -189,9 +201,10 @@ function openBox() {
     ids.forEach((id, i) => {
         setTimeout(() => {
             const el = document.getElementById(id);
-            el.classList.remove('hidden');
-            el.style.opacity = "1";
-            // AUTO-SCROLL REMOVED FROM HERE
+            if(el) {
+                el.classList.remove('hidden');
+                el.style.opacity = "1";
+            }
         }, i * 1800);
     });
     
@@ -229,7 +242,7 @@ function createFloatingIcon() {
     f.style.left = Math.random() * 90 + 'vw';
     f.style.bottom = '-50px';
     f.style.fontSize = '30px';
-    f.style.animation = 'floatUp 2s linear forwards';
+    f.style.animation = 'floatUp 4s linear forwards'; // Slowed down from 2s for better visuals
     body.appendChild(f);
     setTimeout(() => f.remove(), 5000);
 }
