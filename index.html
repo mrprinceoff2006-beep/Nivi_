@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy New Year Nivethitha✨</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    font-family: 'Poppins', sans-serif; overflow: hidden;
+    background: #050505;
+}
+
+body {
+    background: radial-gradient(circle at top right, #1e2a44 0%, #050505 100%);
+    display: flex; justify-content: center; align-items: center;
+    color: white; padding: 15px;
+}
+
+/* --- BACKGROUND --- */
+.moon {
+    position: absolute; top: 20px; right: 20px; width: 50px; height: 50px;
+    background: transparent; border-radius: 50%;
+    box-shadow: -10px 8px 0 2px #fffde7;
+    filter: drop-shadow(0 0 15px rgba(255, 253, 231, 0.6));
+    z-index: 1;
+}
+
+.star {
+    position: absolute; background: white; border-radius: 50%;
+    animation: twinkle var(--duration) infinite ease-in-out;
+}
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* --- EXPANDABLE CONTAINER --- */
+.container {
+    position: relative; 
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px);
+    padding: 25px; 
+    border-radius: 25px;
+    width: 100%; 
+    max-width: 400px; 
+    /* Box expands naturally with content */
+    max-height: 90vh; 
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.5s ease;
+}
+
+/* Manual scrolling only */
+.scroll-content {
+    max-height: 500px;
+    overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+}
+.scroll-content::-webkit-scrollbar { display: none; } /* Safari/Chrome */
+
+/* --- GIFT --- */
+.gift-box {
+    width: 100px; height: 100px; margin: 20px auto;
+    background: linear-gradient(145deg, #ff4d4d, #b22222);
+    border-radius: 12px; position: relative; cursor: pointer;
+    animation: giftBounce 2s infinite ease-in-out;
+    flex-shrink: 0;
+}
+.ribbon-v { position: absolute; width: 18px; height: 100%; background: #ffd700; left: 50%; transform: translateX(-50%); }
+.ribbon-h { position: absolute; height: 18px; width: 100%; background: #ffd700; top: 50%; transform: translateY(-50%); }
+
+@keyframes giftBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* --- TEXT --- */
+h1 { font-family: 'Dancing Script', cursive; color: #ffd700; font-size: 1.8rem; margin: 10px 0; }
+p { font-size: 0.95rem; line-height: 1.6; margin: 15px 0; opacity: 0; transition: opacity 0.8s ease; }
+.hidden { display: none !important; }
+
+.btn-group { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+button {
+    padding: 14px; border-radius: 50px; border: none;
+    font-size: 1rem; cursor: pointer; font-weight: 600;
+}
+.yes { background: linear-gradient(to right, #00b09b, #96c93d); color: white; }
+.no { background: #ff4d4d; color: white; transition: 0.2s; }
+
+.wa-btn {
+    display: block; margin-top: 20px; padding: 15px;
+    border-radius: 50px; background: #25D366; color: white;
+    text-decoration: none; font-weight: bold;
+    animation: pulse 1.5s infinite;
+}
+
+/* --- ANIMATIONS --- */
+.spark, .floating { position: absolute; pointer-events: none; will-change: transform; }
+@keyframes explode {
+    0% { transform: translate3d(0,0,0); opacity: 1; }
+    100% { transform: translate3d(var(--tx), var(--ty), 0); opacity: 0; }
+}
+@keyframes floatUp { to { transform: translate3d(0, -110vh, 0) rotate(360deg); opacity: 0; } }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+@media screen and (max-width:320px){
+    html{
+        font-size: 78%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="moon"></div>
+
+<audio id="bgMusic" loop>
+  <source src="/SK-Reveals-Himself.mp3" type="audio/mp3">
+</audio>
+
+<div class="container">
+    <div id="gift-wrapper">
+        <div class="gift-box" onclick="openBox()">
+            <div class="ribbon-v"></div>
+            <div class="ribbon-h"></div>
+            <div style="position:absolute; top:-25px; left:30%; font-size:40px;">🎀</div>
+        </div>
+        <h2 style="color: gold; font-size: 1.2rem;">Tap to Open 🎁</h2>
+    </div>
+
+    <div id="content" class="hidden scroll-content">
+        <h1 id="l1">Happy New Year Nivethitha 🖤✨</h1>
+        <p id="l2">Can we start this year with full of love and joy? 💞</p>
+        <p id="l3">Will you stay with me forever and hold my hand through everything? I promise to always be by your side 🖤✨</p>
+        <p id="l4">You are my sunshine, my happiness, my everything 💞✨</p>
+        <p id="l5">I want a lifetime of memories, laughs, and love with you 🖤✨</p>
+        <p id="l6">Sorry for teasing you all these days. I made you cry many times and hurt you through my words and actions 🖤✨</p>
+        <p id="l7">I’m truly sorry for all the fights. From here onwards, this will not happen again. Just hold my hand, and I promise I will make this world beautiful for you 🖤✨</p>
+        
+        <h2 id="l8" class="hidden" style="color:#00d2ff; font-size: 1.1rem; margin-top: 20px;">Shall we start this New Year together? 💍</h2>
+        
+        <div id="l9" class="hidden btn-group">
+            <button class="yes" onclick="sayYes()">YES 💍 🖤</button>
+            <button class="no" id="noBtn" onmouseover="moveNo()" onclick="moveNo()">No 😢</button>
+        </div>
+        <p id="l10" style="margin-top:20px; font-weight: bold; opacity:1;">— Yours forever, Nishwa</p>
+    </div>
+
+    <div id="social" class="hidden">
+        <h1>💍 YOU SAID YES! 💍</h1>
+        <p style="opacity:1;">I love you forever! ❤️</p>
+        <a class="wa-btn" id="wa">Send to Nishwa 💚</a>
+    </div>
+</div>
+
+<script>
+// 1. Stars Setup
+const body = document.body;
+for (let i = 0; i < 60; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = Math.random() * 3 + 'px';
+    star.style.width = size; star.style.height = size;
+    star.style.top = Math.random() * 100 + '%';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.setProperty('--duration', Math.random() * 3 + 2 + 's');
+    body.appendChild(star);
+}
+
+function openBox() {
+    document.getElementById('bgMusic').play().catch(() => {});
+    document.getElementById('gift-wrapper').style.display = 'none';
+    const content = document.getElementById('content');
+    content.classList.remove('hidden');
+    
+    const ids = ["l1", "l2", "l3", "l4", "l5", "l6", "l7", "l8", "l9"];
+    ids.forEach((id, i) => {
+        setTimeout(() => {
+            const el = document.getElementById(id);
+            el.classList.remove('hidden');
+            el.style.opacity = "1";
+            // AUTO-SCROLL REMOVED FROM HERE
+        }, i * 1800);
+    });
+    
+    setInterval(createFloatingIcon, 1000);
+    setInterval(createFirework, 2500);
+}
+
+function createFirework() {
+    const colors = ['#FFD700', '#FF2E63', '#00C6FF', '#FFFFFF'];
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * (window.innerHeight * 0.4);
+    for (let i = 0; i < 12; i++) {
+        const s = document.createElement('div');
+        s.className = 'spark';
+        s.style.width = '4px'; s.style.height = '4px';
+        s.style.left = x + 'px'; s.style.top = y + 'px';
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        s.style.background = color;
+        s.style.boxShadow = `0 0 6px ${color}`;
+        const a = Math.random() * Math.PI * 2;
+        const d = Math.random() * 100;
+        s.style.setProperty('--tx', Math.cos(a) * d + 'px');
+        s.style.setProperty('--ty', Math.sin(a) * d + 'px');
+        s.style.animation = 'explode 0.8s ease-out forwards';
+        body.appendChild(s);
+        setTimeout(() => s.remove(), 800);
+    }
+}
+
+function createFloatingIcon() {
+    const icons = ['🖤', '✨', '❤️', '💖'];
+    const f = document.createElement('div');
+    f.className = 'floating';
+    f.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+    f.style.left = Math.random() * 90 + 'vw';
+    f.style.bottom = '-50px';
+    f.style.fontSize = '30px';
+    f.style.animation = 'floatUp 2s linear forwards';
+    body.appendChild(f);
+    setTimeout(() => f.remove(), 5000);
+}
+
+function moveNo() {
+    const btn = document.getElementById('noBtn');
+    const x = Math.random() * (window.innerWidth - 80);
+    const y = Math.random() * (window.innerHeight - 40);
+    btn.style.position = 'fixed';
+    btn.style.left = '0'; btn.style.top = '0';
+    btn.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+}
+
+function sayYes() {
+    document.getElementById('content').classList.add('hidden');
+    document.getElementById('social').classList.remove('hidden');
+    setInterval(createFirework, 400); 
+    const phone = "918248666943";
+    const message = "Yes I want to start this year with you 🖤✨ 💍";
+    document.getElementById('wa').href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+}
+</script>
+</body>
+</html>
